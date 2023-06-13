@@ -21,10 +21,10 @@ export default {
 
 <style scoped>
 header{
-  height: 4em;
+  height: 3em;
   width: auto;
   background: #D9D9D9;
-  padding:  0.5em 3.6em;
+  padding:  0.4em 3.8em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,23 +44,25 @@ header{
 }
 .burger{
   background-image: url("../assets/hamburger.png");
-  background-size: contain;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: center;
   background-color: transparent;
   border: none;
-  width: 2.25em;
-  height: 2.25em;
-  margin: 0.875em 0;
+  width: 2em;
+  height: 2em;
+  margin: 0.4em 0;
 }
 .search-field{
   background-color: #EEEEEE;
-  height: 4em;
+  height: 3em;
   border-radius: 1.2em;
   display: flex;
 }
 .search-input{
   background-color: transparent;
   border: none;
-  height: 3em;
+  height: 2em;
   width: 100%;
   margin: 0.5em 0 0.5em 0.5em;
 }

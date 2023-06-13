@@ -5,16 +5,24 @@ import Navbar from "./components/Navbar.vue";
 
 <template>
   <Navbar></Navbar>
-  <div class="grid-for-notes">
-    <NoteInGrid></NoteInGrid>
-    <NoteInGrid></NoteInGrid>
-    <NoteInGrid></NoteInGrid>
-    <NoteInGrid></NoteInGrid>
+  <div class="side-bar"></div>
+  <div class="content">
+    <div class="grid-for-notes">
+      <NoteInGrid></NoteInGrid>
+      <NoteInGrid></NoteInGrid>
+      <NoteInGrid></NoteInGrid>
+      <NoteInGrid></NoteInGrid>
+    </div>
   </div>
 </template>
 <style scoped>
+.content{
+  padding:  4.2em 3.8em;
+}
 .grid-for-notes{
-  padding:  3.6em;
+  width: 100%;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2.8em;
 }
 </style>
