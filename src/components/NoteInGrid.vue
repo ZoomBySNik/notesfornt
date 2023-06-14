@@ -8,7 +8,7 @@
     </div>
     <div class="note-content">
       <p class="content-of-note">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec massa sapien faucibus et. Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec massa sapien faucibus et. Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.
+         Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec massa sapien faucibus et. Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.
       </p>
     </div>
   </div>
@@ -44,8 +44,13 @@ export default {
 
 .note-content {
   padding: 0.8em;
+  height: 16em;
 }
 .content-of-note{
   font-size: 0.8em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 15;
+  overflow: hidden;
 }
 </style>
