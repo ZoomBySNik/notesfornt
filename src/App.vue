@@ -35,13 +35,12 @@ import Navbar from "./components/Navbar.vue";
 @media (max-width: 1100px) {
   .grid-for-notes{
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2.2em;
+    grid-gap: 1.8em;
   }
 }
 @media (max-width: 750px) {
   .grid-for-notes{
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: 2em;
   }
 }
 </style>

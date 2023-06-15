@@ -1,7 +1,13 @@
 <template>
   <div class="note">
-    <div class="header-of-note">
-      <h1 class="note-title">Title</h1>
+    <div class="header-of-note for-row">
+      <div class="flex1">
+        <h1 class="note-title">Title</h1>
+      </div>
+      <div class="flex2">
+        <button class="pinned-pin" v-if="pinned"></button>
+        <button class="pin" v-else></button>
+      </div>
     </div>
     <div class="time-of-note">
       <p class="time-line">DateTime</p>
@@ -32,6 +38,40 @@ export default {
 
 .header-of-note {
   padding: 0.8em;
+}
+.pin{
+  background-image: url("../assets/office-push-pin.png");
+  background-size: 100%;
+  opacity: .0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 1.6em;
+  height: 1.6em;
+  transition: .3s;
+}
+.note:hover .pin{
+  opacity: .5;
+}
+.pinned-pin{
+  background-image: url("../assets/pin.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 1.6em;
+  height: 1.6em;
+  opacity: .8;
+}
+.flex1{
+  text-align: left;
+  width: 80%;
+}
+.flex2{
+  text-align: right;
+  width: 20%;
 }
 .time-of-note{
   background-color: #C6C6C6;

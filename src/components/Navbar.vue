@@ -1,7 +1,8 @@
 <template>
-  <header>
+  <header class="for-row">
     <div class="flex1">
       <button class="burger"></button>
+      <button class="plus"></button>
     </div>
     <div class="flex2">
       <div class="search-field">
@@ -24,10 +25,7 @@ header{
   height: 3em;
   width: auto;
   background: #D9D9D9;
-  padding:  0.4em 3.8em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding:  0.5em 3.8em;
 }
 .flex1{
   text-align: left;
@@ -52,6 +50,17 @@ header{
   width: 2em;
   height: 2em;
   margin: 0.4em 0;
+}
+.plus{
+  background-image: url("../assets/free-icon-pencil-4409398.png");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 2em;
+  height: 2em;
+  margin: 0.4em 2.4em;
 }
 .search-field{
   background-color: #EEEEEE;
