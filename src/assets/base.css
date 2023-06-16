@@ -6,3 +6,7 @@
     justify-content: space-between;
     align-items: center;
 }
+.text-input{
+    background-color: transparent;
+    border: none;
+}
