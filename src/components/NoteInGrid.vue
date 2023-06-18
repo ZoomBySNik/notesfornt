@@ -17,6 +17,15 @@
          Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec massa sapien faucibus et. Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.
       </p>
     </div>
+    <div class="note-bottom">
+      <div class="labels-holder">
+        <div class="label">
+          <p class="label-name">Loreum ipsum</p>
+          <button class="label-button"></button>
+        </div>
+      </div>
+      <button class="note-delete"></button>
+    </div>
   </div>
 </template>
 
@@ -84,7 +93,7 @@ export default {
 
 .note-content {
   padding: 0.8em;
-  height: 16em;
+  height: 15em;
 }
 .content-of-note{
   font-size: 0.8em;
@@ -92,5 +101,47 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 15;
   overflow: hidden;
+}
+
+.note-bottom {
+  margin: 0 0.8em 0.8em;
+  width: auto;
+  float: right;
+}
+.labels-holder{
+  display: flex;
+}
+.label{
+  padding: 0.4em;
+  border-radius: 1em;
+  background-color: #C6C6C6;
+  display: flex;
+}
+.label-name{
+  margin-right: 0.8em;
+}
+.label-button{
+  background-image: url("../assets/cross-small.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 1.2em;
+  height: 1.2em;
+}
+.note-delete{
+  display: flex;
+  background-image: url("../assets/free-icon-font-trash-can-check.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 1.8em;
+  height: 1.8em;
+  opacity: .8;
+  margin-right: 0;
+  margin-top: 0.8em;
 }
 </style>
