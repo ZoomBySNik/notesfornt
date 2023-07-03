@@ -38,6 +38,7 @@ export default {
 <style scoped>
 .note{
   background-color: #D9D9D9;
+  height: 27em;
 }
 
 .note-title {
