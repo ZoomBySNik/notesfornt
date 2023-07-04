@@ -1,16 +1,25 @@
 <script setup>
 import NoteInGrid from "./components/NoteInGrid.vue";
 import Navbar from "./components/Navbar.vue";
+
+const notes = [
+  {id: 1, title:'Title1', pinned:false, time:'11:30', content:'ergbi eorhfndgerijfdm  ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+  {id: 2, title:'Title2', pinned:false, time:'11:32', content:'fdhgjfdhmgfergbi eorhfndgerijfdm  ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+  {id: 3, title:'Title3', pinned:true, time:'11:40', content:'ergbi eorhfndgerijfdm  etjgffretrjykhgdfrytujgfhwogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+  {id: 4, title:'Title4', pinned:false, time:'11:42', content:'efdhjgkhgfdyuigkbhrgbi eorhfndgerijfdm  ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+]
+const labels = [
+  {id: 1, title:'Title1'},
+  {id: 2, title:'Title2'}
+]
+
 </script>
 
 <template>
-  <Navbar></Navbar>
+  <Navbar :labels="labels"></Navbar>
   <div class="content">
     <div class="grid-for-notes">
-      <NoteInGrid></NoteInGrid>
-      <NoteInGrid></NoteInGrid>
-      <NoteInGrid></NoteInGrid>
-      <NoteInGrid></NoteInGrid>
+      <NoteInGrid v-for="note in notes" :note="note"></NoteInGrid>
     </div>
   </div>
 </template>

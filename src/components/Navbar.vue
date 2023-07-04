@@ -13,8 +13,7 @@
     <div class="flex3"><button class="login" @click="isLoginOpen=!isLoginOpen"></button></div>
   </header>
   <ul class="hidden-menu" v-if="isMenuOpen">
-    <li @click="toggleMenu"><a>Label1</a></li>
-    <li @click="toggleMenu"><a>Label2</a></li>
+    <li @click="toggleMenu" v-for="label in labels"><a>{{ label.title }}</a></li>
     <li class="for-row">
       <input type="text" placeholder="Добавить папку" class="text-input tag-add-input">
       <button class="add-label-button"></button>
@@ -48,6 +47,7 @@ export default {
       required: false,
       default: false
     },
+    labels: Array
   }
 }
 </script>

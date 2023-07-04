@@ -2,19 +2,19 @@
   <div class="note">
     <div class="header-of-note for-row">
       <div class="flex1">
-        <h1 class="note-title">Title</h1>
+        <h1 class="note-title">{{ note.title }}</h1>
       </div>
       <div class="flex2">
-        <button class="pinned-pin" v-if="pinned"></button>
+        <button class="pinned-pin" v-if="note.pinned"></button>
         <button class="pin" v-else></button>
       </div>
     </div>
     <div class="time-of-note">
-      <p class="time-line">DateTime</p>
+      <p class="time-line">{{ note.time }}</p>
     </div>
     <div class="note-content">
       <p class="content-of-note">
-         Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Donec massa sapien faucibus et. Urna nunc id cursus metus aliquam eleifend mi in nulla. Congue quisque egestas diam in. Leo urna molestie at elementum eu facilisis sed. Vulputate eu scelerisque felis imperdiet proin. Quam elementum pulvinar etiam non quam lacus suspendisse faucibus. Sed sed risus pretium quam vulputate dignissim.
+        {{note.content}}
       </p>
     </div>
     <div class="note-bottom">
@@ -31,7 +31,10 @@
 
 <script>
 export default {
-  name: "NoteInGrid"
+  name: "NoteInGrid",
+  props: {
+    note: Object
+  }
 }
 </script>
 
