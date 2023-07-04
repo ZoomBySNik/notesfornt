@@ -1,5 +1,6 @@
 <template>
   <div class="box-for-login">
+    <button class="close-button" @click="clickOnClose">x</button>
     <div class="input-line"><p>Login</p><input type="text" class="text-input" placeholder="Login"></div>
     <div class="input-line"><p>Password</p><input type="text" class="text-input" placeholder="Password"></div>
     <div><button class="button-submit">Войти</button></div>
@@ -8,7 +9,12 @@
 
 <script>
 export default {
-  name: "LoginField"
+  name: "LoginField",
+  methods: {
+    clickOnClose(){
+      this.$emit('button-on-close-clicked');
+    }
+  }
 }
 </script>
 

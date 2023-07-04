@@ -1,12 +1,10 @@
 <script setup>
 import NoteInGrid from "./components/NoteInGrid.vue";
 import Navbar from "./components/Navbar.vue";
-import LoginField from "./components/LoginField.vue";
 </script>
 
 <template>
   <Navbar></Navbar>
-  <LoginField style="visibility: hidden"></LoginField>
   <div class="content">
     <div class="grid-for-notes">
       <NoteInGrid></NoteInGrid>

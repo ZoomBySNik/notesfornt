@@ -10,7 +10,7 @@
         <button class="search-button"></button>
       </div>
     </div>
-    <div class="flex3"><button class="login"></button></div>
+    <div class="flex3"><button class="login" @click="isLoginOpen=!isLoginOpen"></button></div>
   </header>
   <ul class="hidden-menu" v-if="isMenuOpen">
     <li @click="toggleMenu"><a>Label1</a></li>
@@ -20,14 +20,19 @@
       <button class="add-label-button"></button>
     </li>
   </ul>
+  <LoginField v-if="isLoginOpen" @button-on-close-clicked="isLoginOpen=!isLoginOpen"></LoginField>
 </template>
 
 <script>
 
+import LoginField from '@/components/LoginField.vue';
+
 export default {
+  components: {LoginField},
   data() {
     return {
-      isMenuOpen: this.isOpen
+      isMenuOpen: this.isOpen,
+      isLoginOpen: false
     };
   },
   name: "Navbar",
