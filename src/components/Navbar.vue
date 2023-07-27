@@ -19,7 +19,7 @@
       <button class="add-label-button"></button>
     </li>
   </ul>
-  <LoginField v-if="isLoginOpen" @button-on-close-clicked="isLoginOpen=!isLoginOpen"></LoginField>
+  <LoginField style="position: relative" v-if="isLoginOpen" @button-on-close-clicked="isLoginOpen=!isLoginOpen"></LoginField>
 </template>
 
 <script>

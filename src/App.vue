@@ -1,25 +1,43 @@
-<script setup>
-import NoteInGrid from "./components/NoteInGrid.vue";
-import Navbar from "./components/Navbar.vue";
+<script>
+import Navbar from "@/components/Navbar.vue";
+import NoteInGrid from "@/components/NoteInGrid.vue";
 
-const notes = [
-  {id: 1, title:'Title1', pinned:false, time:'11:30', content:'ergbi eorhfndgerijfdm  ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
-  {id: 2, title:'Title2', pinned:false, time:'11:32', content:'fdhgjfdhmgfergbi eorhfndgerijfdm  ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
-  {id: 3, title:'Title3', pinned:true, time:'11:40', content:'ergbi eorhfndgerijfdm  etjgffretrjykhgdfrytujgfhwogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
-  {id: 4, title:'Title4', pinned:false, time:'11:42', content:'efdhjgkhgfdyuigkbhrgbi eorhfndgerijfdm  ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
-]
-const labels = [
-  {id: 1, title:'Title1'},
-  {id: 2, title:'Title2'}
-]
-
+export default {
+  components: {NoteInGrid, Navbar},
+  data() {
+    return {
+      notes: [
+        {id: 1, title:'Title1', pinned:false, time:'11:30', content:'ergbi eorhfndgerijfdm ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+        {id: 2, title:'Title2', pinned:false, time:'11:32', content:'fdhgjfdhmgfergbi eorhfndgerijfdm ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+        {id: 3, title:'Title3', pinned:true, time:'11:40', content:'ergbi eorhfndgerijfdm etjgffretrjykhgdfrytujgfhwogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+        {id: 4, title:'Title4', pinned:false, time:'11:42', content:'efdhjgkhgfdyuigkbhrgbi eorhfndgerijfdm ewogndkmelwgnoyh weingdmroewtjmrh ginemwoegnh regklfmeorigj regneworinh'},
+      ],
+      labels: [
+        {id: 1, title:'Title1'},
+        {id: 2, title:'Title2'}
+      ]
+    };
+  },
+  computed: {
+    pinnedNotes() {
+      return this.notes.filter(note => note.pinned).sort((a, b) => a.time.localeCompare(b.time));
+    },
+    unpinnedNotes() {
+      return this.notes.filter(note => !note.pinned).sort((a, b) => a.time.localeCompare(b.time));
+    }
+  }
+};
 </script>
 
 <template>
   <Navbar :labels="labels"></Navbar>
   <div class="content">
     <div class="grid-for-notes">
-      <NoteInGrid v-for="note in notes" :note="note"></NoteInGrid>
+      <NoteInGrid v-for="note in pinnedNotes" :note="note"></NoteInGrid>
+    </div>
+    <hr style="margin: 2em 0">
+    <div class="grid-for-notes">
+      <NoteInGrid v-for="note in unpinnedNotes" :note="note"></NoteInGrid>
     </div>
   </div>
 </template>

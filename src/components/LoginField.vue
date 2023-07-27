@@ -1,4 +1,6 @@
 <template>
+  <div @click="clickOnClose" class="gray-background">
+  </div>
   <div class="box-for-login">
     <button class="close-button" @click="clickOnClose">x</button>
     <div class="input-line"><p>Login</p><input type="text" class="text-input" placeholder="Login"></div>
