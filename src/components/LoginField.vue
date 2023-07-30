@@ -3,9 +3,12 @@
   </div>
   <div class="box-for-login">
     <button class="close-button" @click="clickOnClose">x</button>
-    <div class="input-line"><p>Login</p><input type="text" class="text-input" placeholder="Login"></div>
-    <div class="input-line"><p>Password</p><input type="text" class="text-input" placeholder="Password"></div>
-    <div><button class="button-submit">Войти</button></div>
+    <div class="input-line"><p>Email</p><input type="text" class="text-input" placeholder="Email"></div>
+    <div class="input-line"><p>Пароль</p><input type="text" class="text-input" placeholder="Пароль"></div>
+    <div>
+      <button class="button-submit">Войти</button>
+      <button class="button-submit" @click="clickOnRegister">Регистрация</button>
+    </div>
   </div>
 </template>
 
@@ -15,6 +18,9 @@ export default {
   methods: {
     clickOnClose(){
       this.$emit('button-on-close-clicked');
+    },
+    clickOnRegister(){
+      this.$emit('button-on-register-clicked')
     }
   }
 }
@@ -33,34 +39,4 @@ export default {
   border-radius: 1.6em;
   box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.6);
 }
-  .input-line{
-    display: flex;
-    margin: auto;
-  }
-  .input-line p{
-    text-align: left;
-    width: 30%;
-    margin: 0.4em;
-    padding: 0.4em;
-
-  }
-  .input-line input{
-    text-align: right;
-    background: #D9D9D9;
-    width: 70%;
-    margin: 0.4em;
-    border-radius: 0.4em;
-    padding: 0.4em;
-  }
-  .button-submit{
-    border-style: none;
-    background: #1E282E;
-    color: #D9D9D9;
-    border-radius: 0.8em;
-    padding: 0.4em 0.8em;
-    margin: 0.4em;
-  }
-  .button-submit:hover{
-    background: #313e44;
-  }
 </style>

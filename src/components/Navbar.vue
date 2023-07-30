@@ -19,19 +19,30 @@
       <button class="add-label-button"></button>
     </li>
   </ul>
-  <LoginField style="position: relative" v-if="isLoginOpen" @button-on-close-clicked="isLoginOpen=!isLoginOpen"></LoginField>
+  <LoginField
+      style="position: relative" v-if="isLoginOpen"
+      @button-on-close-clicked="isLoginOpen=!isLoginOpen" @button-on-register-clicked="openRegister"
+  >
+  </LoginField>
+  <RegisterField
+      style="position: relative" v-if="isRegisterOpen"
+      @button-on-close-clicked="isRegisterOpen=!isRegisterOpen"
+  >
+  </RegisterField>
 </template>
 
 <script>
 
 import LoginField from '@/components/LoginField.vue';
+import RegisterField from "@/components/RegisterField.vue";
 
 export default {
-  components: {LoginField},
+  components: {RegisterField, LoginField},
   data() {
     return {
       isMenuOpen: this.isOpen,
-      isLoginOpen: false
+      isLoginOpen: false,
+      isRegisterOpen: false,
     };
   },
   name: "Navbar",
@@ -40,6 +51,11 @@ export default {
       this.isMenuOpen = !this.isMenuOpen;
       console.log('toggleMenu');
     },
+    openRegister: function () {
+      this.isLoginOpen = false;
+      this.isRegisterOpen = true;
+      console.log('openRegister');
+    }
   },
   props:{
     isOpen: {
