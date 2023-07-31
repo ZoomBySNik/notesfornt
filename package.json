@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "cors": "^2.8.5",
     "lorem-ipsum": "^2.0.8",
     "v-click-outside": "^3.2.0",
-    "vue": "^3.3.2"
+    "vue": "^3.3.2",
+    "vue-cookies": "^1.8.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

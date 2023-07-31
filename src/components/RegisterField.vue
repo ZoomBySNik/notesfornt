@@ -3,25 +3,68 @@
   </div>
   <div class="box-for-register">
     <button class="close-button" @click="clickOnClose">x</button>
-    <div class="input-line"><p>Фамилия</p><input type="text" class="text-input" placeholder="Фамилия"></div>
-    <div class="input-line"><p>Имя</p><input type="text" class="text-input" placeholder="Имя"></div>
-    <div class="input-line"><p>Отчество</p><input type="text" class="text-input" placeholder="Отчество"></div>
-    <div class="input-line"><p>Дата рождения</p><input type="date" class="text-input" placeholder="Отчество"></div>
-    <div class="input-line"><p>Email</p><input type="email" class="text-input" placeholder="Email"></div>
-    <div class="input-line"><p>Пароль</p><input type="password" class="text-input" placeholder="Пароль"></div>
-    <div class="input-line"><p>Пароль ещё раз</p><input type="password" class="text-input" placeholder="Пароль ещё раз"></div>
+    <div class="input-line"><p>Фамилия</p><input type="text" class="text-input" v-model="surname" placeholder="Фамилия"></div>
+    <div class="input-line"><p>Имя</p><input type="text" class="text-input" v-model="name" placeholder="Имя"></div>
+    <div class="input-line"><p>Отчество</p><input type="text" class="text-input" v-model="patronymic" placeholder="Отчество"></div>
+    <div class="input-line"><p>Дата рождения</p><input type="date" class="text-input" v-model="dateOfBirth" placeholder="Дата рождения"></div>
+    <div class="input-line"><p>Email</p><input type="email" class="text-input" v-model="email" placeholder="Email"></div>
+    <div class="input-line"><p>Пароль</p><input type="password" class="text-input" v-model="password" placeholder="Пароль"></div>
+    <div class="input-line"><p>Пароль ещё раз</p><input type="password" class="text-input" v-model="repeatPassword" placeholder="Пароль ещё раз"></div>
     <div>
-      <button class="button-submit">Зарегистрироваться</button>
+      <button class="button-submit" @click="registerUser">Зарегистрироваться</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "RegisterField",
+  data() {
+    return {
+      surname: "",
+      name: "",
+      patronymic: "",
+      dateOfBirth: "",
+      email: "",
+      password: "",
+      repeatPassword: "",
+    };
+  },
   methods: {
     clickOnClose(){
+      this.name = "";
+      this.surname = "";
+      this.patronymic = "";
+      this.dateOfBirth = "";
+      this.email = "";
+      this.password = "";
+      this.confirmPassword = "";
       this.$emit('button-on-close-clicked');
+    },
+    registerUser(){
+      const userData = {
+        name: this.name,
+        surname: this.surname,
+        patronymic: this.patronymic,
+        dateOfBirth: this.dateOfBirth,
+        email: this.email,
+        password: this.password,
+        repeatPassword: this.repeatPassword,
+      };
+
+      axios.post('/users', userData)
+          .then(response => {
+            // Handle the response from the server
+            localStorage.token = response.data;
+            console.log(response.data);
+            this.clickOnClose();
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+          });
     }
   }
 }
@@ -30,7 +73,7 @@ export default {
 <style scoped>
 .box-for-register{
   width: 30em;
-  height: 23em;
+  height: 22em;
   padding: 2em;
   background-color: #C6C6C6;
   position: fixed;
