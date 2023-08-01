@@ -55,7 +55,8 @@ export default {
       this.isLoginOpen = false;
       this.isRegisterOpen = true;
       console.log('openRegister');
-    }
+    },
+
   },
   props:{
     isOpen: {
