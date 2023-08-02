@@ -36,9 +36,10 @@ export default {
       axios.get('/users', {params: {email: this.email, password: this.password}})
           .then(response => {
             // Handle the response from the server
-            localStorage.token = response.data;
+            localStorage.setItem('token', response.data);
             console.log(response.data);
             this.clickOnClose();
+            window.location.reload();
           })
           .catch(error => {
             // Handle any errors that occurred during the request

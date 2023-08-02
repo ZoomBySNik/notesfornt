@@ -24,20 +24,35 @@ export default {
     },
     unpinnedNotes() {
       return this.notes.filter(note => !note.pinned).sort((a, b) => a.time.localeCompare(b.time));
-    }
-  }
+    },
+    loggedUser() {
+      if (localStorage.getItem('token') !== null){
+        console.log('true');
+        return true
+      }
+      else{
+        console.log('false');
+        return false
+      }
+    },
+  },
 };
 </script>
 
 <template>
-  <Navbar :labels="labels"></Navbar>
+  <Navbar :labels="labels" :isLogged="loggedUser"></Navbar>
   <div class="content">
-    <div class="grid-for-notes">
-      <NoteInGrid v-for="note in pinnedNotes" :note="note"></NoteInGrid>
+    <div v-if="loggedUser">
+      <div class="grid-for-notes">
+        <NoteInGrid v-for="note in pinnedNotes" :note="note"></NoteInGrid>
+      </div>
+      <hr style="margin: 2em 0">
+      <div class="grid-for-notes">
+        <NoteInGrid v-for="note in unpinnedNotes" :note="note"></NoteInGrid>
+      </div>
     </div>
-    <hr style="margin: 2em 0">
-    <div class="grid-for-notes">
-      <NoteInGrid v-for="note in unpinnedNotes" :note="note"></NoteInGrid>
+    <div v-if="!loggedUser">
+      Войдите чтобы видеть свои заметки
     </div>
   </div>
 </template>

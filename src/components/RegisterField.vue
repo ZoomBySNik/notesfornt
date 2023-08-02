@@ -63,8 +63,9 @@ export default {
       axios.post('/users', userData)
           .then(response => {
             // Handle the response from the server
-            localStorage.token = response.data;
+            localStorage.setItem('token', response.data);
             console.log(response.data);
+            window.location.reload();
             this.clickOnClose();
           })
           .catch(error => {

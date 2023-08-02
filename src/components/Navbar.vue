@@ -1,18 +1,24 @@
 <template>
   <header class="for-row">
-    <div class="flex1">
+    <div class="flex1" v-show="isLogged">
       <button class="burger" @click="toggleMenu"></button>
       <button class="add-note-button"></button>
     </div>
-    <div class="flex2">
+    <div class="flex2" v-if="isLogged">
       <div class="search-field">
         <input type="text" class="search-input text-input" placeholder="Поиск по тексту">
         <button class="search-button"></button>
       </div>
     </div>
-    <div class="flex3"><button class="login" @click="isLoginOpen=!isLoginOpen"></button></div>
+    <div class="flex3" v-if="isLogged">
+      <button class="logout" @click="clickOnLogout"></button>
+    </div>
+    <div class="flex4" v-if="isLogged===false">
+      <button class="login" @click="isLoginOpen=!isLoginOpen"></button>
+    </div>
   </header>
   <ul class="hidden-menu" v-if="isMenuOpen">
+    <li @click="toggleMenu" ><a>Все заметки</a></li>
     <li @click="toggleMenu" v-for="label in labels"><a>{{ label.title }}</a></li>
     <li class="for-row">
       <input type="text" placeholder="Добавить папку" class="text-input tag-add-input">
@@ -56,7 +62,10 @@ export default {
       this.isRegisterOpen = true;
       console.log('openRegister');
     },
-
+    clickOnLogout: function (){
+      localStorage.removeItem('token');
+      window.location.reload();
+    }
   },
   props:{
     isOpen: {
@@ -64,8 +73,12 @@ export default {
       required: false,
       default: false
     },
-    labels: Array
-  }
+    labels: Array,
+    isLogged: {
+      type: Boolean,
+      required: true,
+    }
+  },
 }
 </script>
 
@@ -87,6 +100,11 @@ header{
 .flex3{
   text-align: right;
   width: 35%;
+  margin: 0;
+}
+.flex4 {
+  text-align: right;
+  width: 100%;
   margin: 0;
 }
 .burger{
@@ -134,6 +152,18 @@ header{
   margin-right: 0.5em;
 }
 .login
+{
+  background-image: url("../assets/account.png");
+  background-size: 50%;
+  background-color: #EEEEEE;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  width: 3em;
+  height: 3em;
+  border-radius: 100%;
+}
+.logout
 {
   background-image: url("../assets/account.png");
   background-size: 50%;
