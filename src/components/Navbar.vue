@@ -2,7 +2,7 @@
   <header class="for-row">
     <div class="flex1" v-show="isLogged">
       <button class="burger" @click="toggleMenu"></button>
-      <button class="add-note-button"></button>
+      <button class="add-note-button" @click="isCreationNoteOpen=!isCreationNoteOpen"></button>
     </div>
     <div class="flex2" v-if="isLogged">
       <div class="search-field">
@@ -35,20 +35,23 @@
       @button-on-close-clicked="isRegisterOpen=!isRegisterOpen"
   >
   </RegisterField>
+  <FieldOfCreationNote v-if="isCreationNoteOpen" @button-on-close-clicked="isCreationNoteOpen=!isCreationNoteOpen"></FieldOfCreationNote>
 </template>
 
 <script>
 
 import LoginField from '@/components/LoginField.vue';
 import RegisterField from "@/components/RegisterField.vue";
+import FieldOfCreationNote from "@/components/FieldOfCreationNote.vue";
 
 export default {
-  components: {RegisterField, LoginField},
+  components: {FieldOfCreationNote, RegisterField, LoginField},
   data() {
     return {
       isMenuOpen: this.isOpen,
       isLoginOpen: false,
       isRegisterOpen: false,
+      isCreationNoteOpen: false,
     };
   },
   name: "Navbar",

@@ -52,3 +52,17 @@
 .button-submit:hover{
     background: #313e44;
 }
+
+.input-field{
+    height: 90%;
+    margin: auto;
+}
+
+.input-field textarea{
+    background: #D9D9D9;
+    width: 96%;
+    height: 90%;
+    margin: 0.8em;
+    border-radius: 0.4em;
+    padding: 0.8em;
+}

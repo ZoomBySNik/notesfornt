@@ -26,14 +26,7 @@ export default {
       return this.notes.filter(note => !note.pinned).sort((a, b) => a.time.localeCompare(b.time));
     },
     loggedUser() {
-      if (localStorage.getItem('token') !== null){
-        console.log('true');
-        return true
-      }
-      else{
-        console.log('false');
-        return false
-      }
+      return localStorage.getItem('token') !== null;
     },
   },
 };
