@@ -2,19 +2,18 @@
   <div class="note">
     <div class="header-of-note for-row">
       <div class="flex1">
-        <h1 class="note-title">{{ note.title }}</h1>
+        <h1 class="note-title" :title="note.header">{{ truncatedHeader }}</h1>
       </div>
       <div class="flex2">
-        <button class="pinned-pin" v-if="note.pinned"></button>
-        <button class="pin" v-else></button>
+        <button class="pinned-pin" @click="unpinNote" v-if="note.isPinned"></button>
+        <button class="pin" @click="pinNote" v-else></button>
       </div>
     </div>
     <div class="time-of-note">
-      <p class="time-line">{{ note.time }}</p>
+      <p class="time-line">  </p>
     </div>
     <div class="note-content">
-      <p class="content-of-note">
-        {{note.content}}
+      <p class="content-of-note" v-html="note.body.replace(/\n/g, '<br>')">
       </p>
     </div>
     <div class="note-bottom">
@@ -30,10 +29,47 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "NoteInGrid",
   props: {
     note: Object
+  },
+  computed: {
+    truncatedHeader() {
+      const maxCharacters = 19; // Максимальное количество символов
+      if (this.note.header.length > maxCharacters) {
+        return this.note.header.substring(0, maxCharacters) + '...';
+      }
+      return this.note.header;
+    }
+  },
+  methods: {
+    pinNote() {
+      axios.put('/notes/'+this.note.id+'/pin', this.note.id,{headers: {"Authorization": `Bearer ${localStorage.token}`}})
+          .then(response => {
+            // Handle the response from the server
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+          });
+    },
+    unpinNote(){
+      axios.put('/notes/'+this.note.id+'/unpin', this.note.id,{headers: {"Authorization": `Bearer ${localStorage.token}`}})
+          .then(response => {
+            // Handle the response from the server
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+          });
+    }
   }
 }
 </script>
@@ -100,7 +136,7 @@ export default {
   height: 15em;
 }
 .content-of-note{
-  font-size: 0.8em;
+  font-size: 0.9em;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 15;

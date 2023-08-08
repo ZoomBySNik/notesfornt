@@ -21,8 +21,8 @@
     <li @click="toggleMenu" ><a>Все заметки</a></li>
     <li @click="toggleMenu" v-for="label in labels"><a>{{ label.title }}</a></li>
     <li class="for-row">
-      <input type="text" placeholder="Добавить папку" class="text-input tag-add-input">
-      <button class="add-label-button"></button>
+      <input type="text" placeholder="Добавить папку" class="text-input tag-add-input" v-model="title">
+      <button class="add-label-button" @click="createNewLabel"></button>
     </li>
   </ul>
   <LoginField
@@ -43,6 +43,7 @@
 import LoginField from '@/components/LoginField.vue';
 import RegisterField from "@/components/RegisterField.vue";
 import FieldOfCreationNote from "@/components/FieldOfCreationNote.vue";
+import axios from "axios";
 
 export default {
   components: {FieldOfCreationNote, RegisterField, LoginField},
@@ -52,10 +53,11 @@ export default {
       isLoginOpen: false,
       isRegisterOpen: false,
       isCreationNoteOpen: false,
+      title: "",
     };
   },
   name: "Navbar",
-  methods:{
+  methods: {
     toggleMenu: function () {
       this.isMenuOpen = !this.isMenuOpen;
       console.log('toggleMenu');
@@ -68,6 +70,22 @@ export default {
     clickOnLogout: function (){
       localStorage.removeItem('token');
       window.location.reload();
+    },
+    createNewLabel(){
+      const labelData = {
+        title: this.title,
+      };
+      axios.post('/labels', labelData, { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
+          .then(response => {
+            // Handle the response from the server
+            console.log(response.data);
+            window.location.reload();
+            this.toggleMenu();
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+          });
     }
   },
   props:{
@@ -168,8 +186,8 @@ header{
 }
 .logout
 {
-  background-image: url("../assets/account.png");
-  background-size: 50%;
+  background-image: url("../assets/free-icon-font-exit-3917379.png");
+  background-size: 45%;
   background-color: #EEEEEE;
   background-repeat: no-repeat;
   background-position: center;
