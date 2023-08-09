@@ -29,7 +29,6 @@ export default {
             this.labels = response.data;
           })
           .catch(error => {
-            // Handle any errors that occurred during the request
             console.error(error);
           });
       axios.get('/notes', { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
@@ -37,7 +36,6 @@ export default {
             this.notes = response.data;
           })
           .catch(error => {
-            // Handle any errors that occurred during the request
             console.error(error);
           });
     }
@@ -49,15 +47,20 @@ export default {
   <Navbar :labels="labels" :isLogged="loggedUser"></Navbar>
   <div class="content">
     <div v-if="loggedUser">
-      <div class="grid-for-notes">
-        <NoteInGrid v-for="note in pinnedNotes" :note="note"></NoteInGrid>
+      <div v-if="notes.length !== 0">
+        <div class="grid-for-notes">
+          <NoteInGrid v-for="note in pinnedNotes" :note="note"></NoteInGrid>
+        </div>
+        <hr style="margin: 2em 0" v-if="pinnedNotes.length > 0 && unpinnedNotes.length > 0">
+        <div class="grid-for-notes">
+          <NoteInGrid v-for="note in unpinnedNotes" :note="note"></NoteInGrid>
+        </div>
       </div>
-      <hr style="margin: 2em 0" v-if="pinnedNotes!==null||unpinnedNotes!==null">
-      <div class="grid-for-notes">
-        <NoteInGrid v-for="note in unpinnedNotes" :note="note"></NoteInGrid>
+      <div v-else>
+        Создайте свою первую заметку нажав на карандаш в верхнем меню
       </div>
     </div>
-    <div v-if="!loggedUser">
+    <div v-else>
       Войдите чтобы видеть свои заметки
     </div>
   </div>

@@ -23,16 +23,27 @@
           <button class="label-button"></button>
         </div>
       </div>
-      <button class="note-delete"></button>
+      <button class="note-delete" @click="isAcceptOpen=true"></button>
     </div>
   </div>
+  <AcceptField v-if="isAcceptOpen"
+      :text="'удалить заметку'" :title="note.header"
+      @button-on-close-clicked="isAcceptOpen=!isAcceptOpen" @button-on-delete-clicked="deleteNote"
+  ></AcceptField>
 </template>
 
 <script>
 import axios from "axios";
+import AcceptField from "@/components/AcceptField.vue";
 
 export default {
   name: "NoteInGrid",
+  components: {AcceptField},
+  data() {
+    return{
+      isAcceptOpen: false,
+    };
+  },
   props: {
     note: Object
   },
@@ -49,17 +60,30 @@ export default {
     pinNote() {
       axios.put('/notes/'+this.note.id+'/pin', this.note.id,{headers: {"Authorization": `Bearer ${localStorage.token}`}})
           .then(response => {
-            // Handle the response from the server
             console.log(response.data);
             window.location.reload();
           })
           .catch(error => {
-            // Handle any errors that occurred during the request
             console.error(error);
           });
     },
     unpinNote(){
       axios.put('/notes/'+this.note.id+'/unpin', this.note.id,{headers: {"Authorization": `Bearer ${localStorage.token}`}})
+          .then(response => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch(error => {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
+            console.error(error);
+          });
+    },
+    deleteNote(){
+      axios.delete( '/notes/'+this.note.id, {headers: {"Authorization": `Bearer ${localStorage.token}`}, data: {noteId: this.note.id}})
           .then(response => {
             // Handle the response from the server
             console.log(response.data);
@@ -67,6 +91,11 @@ export default {
           })
           .catch(error => {
             // Handle any errors that occurred during the request
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
             console.error(error);
           });
     }
