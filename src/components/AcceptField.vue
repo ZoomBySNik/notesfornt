@@ -5,7 +5,7 @@
     <button class="close-button" @click="clickOnClose">x</button>
     <div class="line"><p>Вы уверены что хотите {{ this.text }} "{{ this.title }}"</p>
     </div>
-    <div>
+    <div class="button-field">
       <button class="button-submit" @click="clickOnAccept">Да</button>
       <button class="button-submit" @click="clickOnClose">Нет</button>
     </div>
@@ -39,8 +39,8 @@ export default {
 
 <style scoped>
 .box-for-acception {
-  width: 22em;
-  height: 6em;
+  width: 30em;
+  height: 5em;
   padding: 2em;
   background-color: #C6C6C6;
   position: fixed;
@@ -52,5 +52,9 @@ export default {
   right: 0;
   border-radius: 1.6em;
   box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.6);
+}
+
+.button-field {
+  margin-top: 1.6em;
 }
 </style>

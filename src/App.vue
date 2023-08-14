@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       notes: [],
-      labels: []
+      labels: [],
     };
   },
   computed: {
@@ -34,10 +34,20 @@ export default {
       axios.get('/notes', { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
           .then(response => {
             this.notes = response.data;
+            this.notes.forEach(note => {
+              axios.get('/notes/'+note.id+'/labels', { headers: {"Authorization" : `Bearer ${localStorage.token}`}, data: {noteId: note.id}})
+                  .then(response => {
+                    note.labels = response.data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+            })
           })
           .catch(error => {
             console.error(error);
           });
+
     }
   }
 };

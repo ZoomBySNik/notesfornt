@@ -19,7 +19,10 @@
     <div class="note-bottom">
       <div class="labels-holder">
         <div class="label">
-          <p class="label-name">Loreum ipsum</p>
+          <button class="label-create-button"></button>
+        </div>
+        <div class="label" v-for="label in note.labels">
+          <p class="label-name">{{ label.labelTitle }}</p>
           <button class="label-button"></button>
         </div>
       </div>
@@ -45,7 +48,8 @@ export default {
     };
   },
   props: {
-    note: Object
+    note: Object,
+    labels: Object,
   },
   computed: {
     truncatedHeader() {
@@ -54,7 +58,7 @@ export default {
         return this.note.header.substring(0, maxCharacters) + '...';
       }
       return this.note.header;
-    }
+    },
   },
   methods: {
     pinNote() {
@@ -98,7 +102,7 @@ export default {
             }
             console.error(error);
           });
-    }
+    },
   }
 }
 </script>
@@ -179,12 +183,14 @@ export default {
 }
 .labels-holder{
   display: flex;
+  height: 2em;
 }
 .label{
   padding: 0.4em;
   border-radius: 1em;
   background-color: #C6C6C6;
   display: flex;
+  margin-right: 0.2em;
 }
 .label-name{
   margin-right: 0.8em;
@@ -212,5 +218,16 @@ export default {
   opacity: .8;
   margin-right: 0;
   margin-top: 0.8em;
+}
+
+.label-create-button {
+  background-image: url("../assets/free-icon-font-plus-3917757.png");
+  background-size: 65%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 1.2em;
+  height: 1.2em;
 }
 </style>
