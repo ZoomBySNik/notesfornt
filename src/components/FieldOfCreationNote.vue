@@ -35,7 +35,7 @@ export default {
         body: this.body,
       };
 
-      axios.post('/notes', noteData, { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
+      axios.post('/notes', noteData)
           .then(response => {
             // Handle the response from the server
             console.log(response.data);

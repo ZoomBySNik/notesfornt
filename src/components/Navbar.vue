@@ -75,7 +75,7 @@ export default {
       const labelData = {
         title: this.title,
       };
-      axios.post('/labels', labelData, { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
+      axios.post('/labels', labelData)
           .then(response => {
             // Handle the response from the server
             console.log(response.data);

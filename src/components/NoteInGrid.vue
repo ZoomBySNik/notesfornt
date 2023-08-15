@@ -1,8 +1,8 @@
 <template>
   <div class="note">
     <div class="header-of-note for-row">
-      <div class="flex1">
-        <h1 class="note-title" :title="note.header">{{ truncatedHeader }}</h1>
+      <div class="flex1 note-title-container">
+        <h1 class="note-title" :title="note.header">{{ note.header }}</h1>
       </div>
       <div class="flex2">
         <button class="pinned-pin" @click="unpinNote" v-if="note.isPinned"></button>
@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     pinNote() {
-      axios.put('/notes/'+this.note.id+'/pin', this.note.id,{headers: {"Authorization": `Bearer ${localStorage.token}`}})
+      axios.put('/notes/'+this.note.id+'/pin', this.note.id)
           .then(response => {
             console.log(response.data);
             window.location.reload();
@@ -72,7 +72,7 @@ export default {
           });
     },
     unpinNote(){
-      axios.put('/notes/'+this.note.id+'/unpin', this.note.id,{headers: {"Authorization": `Bearer ${localStorage.token}`}})
+      axios.put('/notes/'+this.note.id+'/unpin', this.note.id)
           .then(response => {
             console.log(response.data);
             window.location.reload();
@@ -87,7 +87,7 @@ export default {
           });
     },
     deleteNote(){
-      axios.delete( '/notes/'+this.note.id, {headers: {"Authorization": `Bearer ${localStorage.token}`}, data: {noteId: this.note.id}})
+      axios.delete( '/notes/'+this.note.id, {data: {noteId: this.note.id}})
           .then(response => {
             // Handle the response from the server
             console.log(response.data);
@@ -95,11 +95,6 @@ export default {
           })
           .catch(error => {
             // Handle any errors that occurred during the request
-            if (error.response) {
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
-            }
             console.error(error);
           });
     },
@@ -165,8 +160,8 @@ export default {
 }
 
 .note-content {
-  padding: 0.8em;
-  height: 15em;
+  padding: 0.8em 0.8em 0;
+  height: 16.5em;
 }
 .content-of-note{
   font-size: 0.9em;
@@ -178,12 +173,13 @@ export default {
 
 .note-bottom {
   margin: 0 0.8em 0.8em;
-  width: auto;
+  width: 94%;
   float: right;
 }
 .labels-holder{
   display: flex;
   height: 2em;
+  flex-direction: row-reverse;
 }
 .label{
   padding: 0.4em;
@@ -218,6 +214,7 @@ export default {
   opacity: .8;
   margin-right: 0;
   margin-top: 0.8em;
+  margin-left: auto;
 }
 
 .label-create-button {
@@ -229,5 +226,12 @@ export default {
   border: none;
   width: 1.2em;
   height: 1.2em;
+}
+
+.note-title-container {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Ограничение по количеству строк */
+  -webkit-box-orient: vertical;
 }
 </style>

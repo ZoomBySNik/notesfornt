@@ -24,18 +24,18 @@ export default {
   },
   beforeMount() {
     if (this.loggedUser) {
-      axios.get('/labels', { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
+      axios.get('/labels')
           .then(response => {
             this.labels = response.data;
           })
           .catch(error => {
             console.error(error);
           });
-      axios.get('/notes', { headers: {"Authorization" : `Bearer ${localStorage.token}`} })
+      axios.get('/notes')
           .then(response => {
             this.notes = response.data;
             this.notes.forEach(note => {
-              axios.get('/notes/'+note.id+'/labels', { headers: {"Authorization" : `Bearer ${localStorage.token}`}, data: {noteId: note.id}})
+              axios.get('/notes/'+note.id+'/labels', {data: {noteId: note.id}})
                   .then(response => {
                     note.labels = response.data;
                   })
@@ -49,6 +49,9 @@ export default {
           });
 
     }
+  },
+  beforeUnmount() {
+    localStorage.removeItem('token');
   }
 };
 </script>
