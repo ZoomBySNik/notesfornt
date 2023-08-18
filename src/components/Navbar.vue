@@ -216,19 +216,5 @@ header{
   color: inherit;
   text-decoration: none;
 }
-.add-label-button{
-  background-image: url("../assets/free-icon-font-plus-3917757.png");
-  background-size: 80%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: transparent;
-  border: none;
-  width: 1.2em;
-  height: 1.2em;
-}
 
-.tag-add-input {
-  width: 90%;
-  text-align: left;
-}
 </style>

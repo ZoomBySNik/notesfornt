@@ -63,3 +63,7 @@
     border-radius: 0.4em;
     padding: 0.8em;
 }
+.tag-add-input {
+    width: 90%;
+    text-align: left;
+}

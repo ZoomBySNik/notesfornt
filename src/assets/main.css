@@ -24,3 +24,13 @@ body{
     z-index: 500;
     background: rgba(160, 160, 160, 0.8);
 }
+.add-label-button{
+    background-image: url("../assets/free-icon-font-plus-3917757.png");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    width: 1.2em;
+    height: 1.2em;
+}

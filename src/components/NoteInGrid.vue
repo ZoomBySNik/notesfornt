@@ -19,11 +19,22 @@
     <div class="note-bottom">
       <div class="labels-holder">
         <div class="label">
-          <button class="label-create-button"></button>
+          <button class="label-create-button" @click="isAddLabelFieldOpen=!isAddLabelFieldOpen"></button>
         </div>
         <div class="label" v-for="label in note.labels">
           <p class="label-name">{{ label.labelTitle }}</p>
           <button class="label-button"></button>
+        </div>
+        <div class="add-label-field" v-show="isAddLabelFieldOpen">
+          <ul>
+            <li v-for="label in availableLabels" :key="label.id">
+              <a @click="addLabel(label.id)">{{ label.title }}</a>
+            </li>
+            <li class="for-row">
+              <input type="text" placeholder="Добавить папку" class="text-input tag-add-input" v-model="title">
+              <button class="add-label-button" @click="createAndAddLabel"></button>
+            </li>
+          </ul>
         </div>
       </div>
       <button class="note-delete" @click="isAcceptOpen=true"></button>
@@ -45,6 +56,8 @@ export default {
   data() {
     return{
       isAcceptOpen: false,
+      isAddLabelFieldOpen: false,
+      title: "",
     };
   },
   props: {
@@ -52,13 +65,14 @@ export default {
     labels: Object,
   },
   computed: {
-    truncatedHeader() {
-      const maxCharacters = 19; // Максимальное количество символов
-      if (this.note.header.length > maxCharacters) {
-        return this.note.header.substring(0, maxCharacters) + '...';
+    availableLabels() {
+      if (this.note.labels) {
+        const noteLabelIds = this.note.labels.map(label => label.noteLabelId);
+        return this.labels.filter(label => !noteLabelIds.includes(label.id));
+      } else {
+        return this.labels;
       }
-      return this.note.header;
-    },
+    }
   },
   methods: {
     pinNote() {
@@ -84,6 +98,24 @@ export default {
               console.log(error.response.headers);
             }
             console.error(error);
+          });
+    },
+    addLabel(labelId){
+      const data = {
+        noteId: this.note.id,
+        labelId: labelId
+      }
+      axios.post('/notes/'+this.note.id+'/labels/'+labelId, data)
+          .then(response => {
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch(error => {
+            if (error.response) {
+              console.log(error.response.data);
+              console.log(error.response.status);
+              console.log(error.response.headers);
+            }
           });
     },
     deleteNote(){
@@ -233,5 +265,19 @@ export default {
   display: -webkit-box;
   -webkit-line-clamp: 1; /* Ограничение по количеству строк */
   -webkit-box-orient: vertical;
+}
+
+.add-label-field {
+  margin-left: 1.9em;
+  margin-top: 2.4em;
+  width: 10%;
+  position: fixed;
+  list-style: none;
+  border-radius: 1em;
+  background-color: #D9D9D9;
+  box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.6);
+  padding: 0.4em;
+  color: #1E282E;
+  z-index: 1000;
 }
 </style>

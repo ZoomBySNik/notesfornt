@@ -23,6 +23,22 @@ export default {
     },
   },
   beforeMount() {
+    axios.get('/notes')
+        .then(response => {
+          this.notes = response.data;
+          this.notes.forEach(note => {
+            axios.get('/notes/'+note.id+'/labels', {data: {noteId: note.id}})
+                .then(response => {
+                  note.labels = response.data;
+                })
+                .catch(error => {
+                  console.error(error);
+                });
+          })
+        })
+        .catch(error => {
+          console.error(error);
+        });
     if (this.loggedUser) {
       axios.get('/labels')
           .then(response => {
@@ -31,23 +47,6 @@ export default {
           .catch(error => {
             console.error(error);
           });
-      axios.get('/notes')
-          .then(response => {
-            this.notes = response.data;
-            this.notes.forEach(note => {
-              axios.get('/notes/'+note.id+'/labels', {data: {noteId: note.id}})
-                  .then(response => {
-                    note.labels = response.data;
-                  })
-                  .catch(error => {
-                    console.error(error);
-                  });
-            })
-          })
-          .catch(error => {
-            console.error(error);
-          });
-
     }
   },
   beforeUnmount() {
@@ -66,7 +65,7 @@ export default {
         </div>
         <hr style="margin: 2em 0" v-if="pinnedNotes.length > 0 && unpinnedNotes.length > 0">
         <div class="grid-for-notes">
-          <NoteInGrid v-for="note in unpinnedNotes" :note="note"></NoteInGrid>
+          <NoteInGrid v-for="note in unpinnedNotes" :note="note" :labels="labels"></NoteInGrid>
         </div>
       </div>
       <div v-else>
