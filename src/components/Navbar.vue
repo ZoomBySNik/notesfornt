@@ -170,7 +170,7 @@ header{
   border: none;
   width: 2.25em;
   height: 2.25em;
-  margin-right: 0.5em;
+  margin: auto 0.5em auto auto;
 }
 .login
 {

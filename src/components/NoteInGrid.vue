@@ -23,7 +23,7 @@
         </div>
         <div class="label" v-for="label in note.labels">
           <p class="label-name">{{ label.labelTitle }}</p>
-          <button class="label-button"></button>
+          <button class="label-button" @click="removeLabelFromNote(label.noteLabelId)"></button>
         </div>
         <div class="add-label-field" v-show="isAddLabelFieldOpen">
           <ul>
@@ -85,6 +85,7 @@ export default {
             console.error(error);
           });
     },
+
     unpinNote(){
       axios.put('/notes/'+this.note.id+'/unpin', this.note.id)
           .then(response => {
@@ -100,6 +101,7 @@ export default {
             console.error(error);
           });
     },
+
     addLabel(labelId){
       const data = {
         noteId: this.note.id,
@@ -118,6 +120,7 @@ export default {
             }
           });
     },
+
     createAndAddLabel() {
       let labelId = null;
       const labelData = {
@@ -125,12 +128,10 @@ export default {
       };
       axios.post('/labels', labelData)
           .then(response => {
-            // Handle the response from the server
             console.log(response.data);
             labelId = response.data;
           })
           .catch(error => {
-            // Handle any errors that occurred during the request
 
             console.error(error);
           });
@@ -152,6 +153,24 @@ export default {
             });
       }
     },
+
+    removeLabelFromNote(labelId){
+      const data = {
+        noteId: this.note.id,
+        labelId: labelId,
+      }
+      axios.delete( '/notes/'+this.note.id+'/labels/'+labelId, {data: data})
+          .then(response => {
+            // Handle the response from the server
+            console.log(response.data);
+            window.location.reload();
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+          });
+    },
+
     deleteNote(){
       axios.delete( '/notes/'+this.note.id, {data: {noteId: this.note.id}})
           .then(response => {
@@ -255,7 +274,7 @@ export default {
   margin-right: 0.2em;
 }
 .label-name{
-  margin-right: 0.8em;
+  margin-right: 0.2em;
 }
 .label-button{
   background-image: url("../assets/cross-small.png");

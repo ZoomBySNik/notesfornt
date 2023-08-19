@@ -23,23 +23,23 @@ export default {
     },
   },
   beforeMount() {
-    axios.get('/notes')
-        .then(response => {
-          this.notes = response.data;
-          this.notes.forEach(note => {
-            axios.get('/notes/'+note.id+'/labels', {data: {noteId: note.id}})
-                .then(response => {
-                  note.labels = response.data;
-                })
-                .catch(error => {
-                  console.error(error);
-                });
-          })
-        })
-        .catch(error => {
-          console.error(error);
-        });
     if (this.loggedUser) {
+      axios.get('/notes')
+          .then(response => {
+            this.notes = response.data;
+            this.notes.forEach(note => {
+              axios.get('/notes/'+note.id+'/labels', {data: {noteId: note.id}})
+                  .then(response => {
+                    note.labels = response.data;
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+            })
+          })
+          .catch(error => {
+            console.error(error);
+          });
       axios.get('/labels')
           .then(response => {
             this.labels = response.data;
