@@ -28,7 +28,7 @@
         <div class="add-label-field" v-show="isAddLabelFieldOpen">
           <ul>
             <li v-for="label in availableLabels" :key="label.id">
-              <a @click="addLabel(label.id)">{{ label.title }}</a>
+              <button @click="addLabel(label.id)" class="add-label-button-available">{{ label.title }}</button>
             </li>
             <li class="for-row">
               <input type="text" placeholder="Добавить папку" class="text-input tag-add-input" v-model="title">
@@ -117,6 +117,40 @@ export default {
               console.log(error.response.headers);
             }
           });
+    },
+    createAndAddLabel() {
+      let labelId = null;
+      const labelData = {
+        title: this.title,
+      };
+      axios.post('/labels', labelData)
+          .then(response => {
+            // Handle the response from the server
+            console.log(response.data);
+            labelId = response.data;
+          })
+          .catch(error => {
+            // Handle any errors that occurred during the request
+
+            console.error(error);
+          });
+      if (labelId !== null) {
+        const data = {
+          noteId: this.note.id,
+          labelId: labelId,
+        }
+        axios.post('/notes/'+this.note.id+'/labels/'+labelId, data)
+            .then(response => {
+              console.log(response.data);
+            })
+            .catch(error => {
+              if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+              }
+            });
+      }
     },
     deleteNote(){
       axios.delete( '/notes/'+this.note.id, {data: {noteId: this.note.id}})
@@ -276,8 +310,15 @@ export default {
   border-radius: 1em;
   background-color: #D9D9D9;
   box-shadow: 0 0 0.8em rgba(0, 0, 0, 0.6);
-  padding: 0.4em;
+  padding: 0.6em;
   color: #1E282E;
   z-index: 1000;
+}
+
+.add-label-button-available{
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
 }
 </style>
