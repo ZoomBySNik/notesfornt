@@ -25,7 +25,8 @@ body{
     z-index: 500;
     background: rgba(160, 160, 160, 0.8);
 }
-.add-label-button{
+
+.add-label-button {
     background-image: url("../assets/free-icon-font-plus-3917757.png");
     background-size: 80%;
     background-repeat: no-repeat;

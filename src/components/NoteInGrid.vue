@@ -190,7 +190,8 @@ export default {
 <style scoped>
 .note{
   background-color: #D9D9D9;
-  height: 27em;
+  height: fit-content;
+  padding: 0.1em;
 }
 
 .note-title {
@@ -246,21 +247,16 @@ export default {
 
 .note-content {
   padding: 0.8em 0.8em 0;
-  height: 16.5em;
+  margin-bottom: 1.6em;
 }
 .content-of-note{
   font-size: 0.9em;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 15;
-  overflow: hidden;
 }
 
 .note-bottom {
   margin: 0 0.8em 0.8em;
   width: 94%;
-  float: right;
-}
+  }
 .labels-holder{
   display: flex;
   height: 2em;
@@ -297,9 +293,7 @@ export default {
   width: 1.8em;
   height: 1.8em;
   opacity: .8;
-  margin-right: 0;
-  margin-top: 0.8em;
-  margin-left: auto;
+  margin: 0.8em 0.25em auto auto;
 }
 
 .label-create-button {

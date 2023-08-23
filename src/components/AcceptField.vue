@@ -55,6 +55,6 @@ export default {
 }
 
 .button-field {
-  margin-top: 1.6em;
+  margin-top: 0.9em;
 }
 </style>
